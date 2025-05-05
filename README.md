@@ -1,6 +1,6 @@
 # Useful information:
 
-The folder contain:
+The folder contains:
 
 (1) Eight .dat files containing the time evolution of the final separation (one for each simulation),
 
