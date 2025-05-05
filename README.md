@@ -1,4 +1,4 @@
-# correlation_paper
+# Useful information:
 
 The folder contain:
 
