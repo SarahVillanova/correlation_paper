@@ -10,6 +10,8 @@ The folder contains:
 
 (4) A Python script to generate Figure 7.
 
-All figures can be easily reproduced using the files and script provided.
 
+To download the machine-readable Table from Kruckow et al. 2021: https://iopscience.iop.org/article/10.3847/1538-4357/ac13ac#apjac13act3
+
+All figures can be easily reproduced using the files and script provided and the Tab.3 from Kruckow et al. 2021.
 The filenames are self-explanatory. If you have questions, feel free to reach out.
