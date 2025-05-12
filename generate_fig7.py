@@ -3,7 +3,16 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 import pandas as pd
+import copyreg
+import matplotlib.path
+import copy
+import matplotlib.path as mpath
 
+def safe_deepcopy_path(self, memo=None):
+    # Bypass deepcopy entirely and return self (safe for legend)
+    return self
+
+mpath.Path.__deepcopy__ = safe_deepcopy_path
 
 params = {'backend': 'agg',
           'axes.labelsize': 24,  
@@ -41,19 +50,17 @@ def estimate_giant_properties(M1):
         M_giant = 0.9 * M_MS
     else:
         if 0.47 <= M1 < 0.53:
-            M_MS = 7.42 * M1 - 2.93
-        elif 0.53 <= M1 < 0.55:
-            M_MS = 15.00 * M1 - 6.95
-        elif 0.55 <= M1 < 0.57:
-            M_MS = 11.36 * M1 - 4.96
-        elif 0.57 <= M1 < 0.59:
-            M_MS = 13.10 * M1 - 5.95
-        elif 0.59 <= M1 < 0.60:
-            M_MS = 15.41 * M1 - 7.31
-        elif 0.60 <= M1 < 0.83:
-            M_MS = 8.70 * M1 - 3.25
-        elif 0.83 <= M1 <= 0.9:
-            M_MS = 32.26 * M1 - 22.90
+            M_MS =  7.42 * M1 - 2.93
+        elif 0.53 <= M1 < 0.59:
+            M_MS =  13.10 * M1 - 5.95
+        elif 0.59 <= M1 < 0.61:
+            M_MS =  15.41 * M1 - 7.31
+        elif 0.61 <= M1 < 0.633:
+            M_MS =  36.90 * M1 - 20.36
+        elif 0.633 <= M1 < 0.835:
+            M_MS =  5.08 * M1 - 0.21
+        elif 0.835 <= M1 <= 0.9:
+            M_MS =  32.26 * M1 - 22.90
         M_giant = 0.75 * M_MS
 
     R_giant = 440 * (M_MS)**(-0.47) * (M1 / 0.6)**(5.1)
@@ -84,12 +91,15 @@ file_path = "Tab5.dat"  # Replace with the actual file path
 table_AGB_RGB = ascii.read(file_path)
 
 
+print(table)
+
+
 plt.figure()
 sc = plt.scatter(table["q_before"], table["a"]/table["R_giant"], c=table["M1"], cmap='rainbow', s=70, linewidth=0.3)
 plt.xscale("log")
 plt.yscale("log")
-q = np.linspace(0.15, 2, 100)
-plt.loglog(q, 0.31 * q - 0.009, '-', color='k', label=r'Eq. (16)')
+q = np.linspace(0.15, 1.2, 100)
+plt.loglog(q, 0.31 * q - 0.009, '-', color='k', label=r'Eq. (13)')
 plt.plot(table_SG["q"], table_SG["a_f"]/ table_SG["R1"], 's', color='k', label='Simulations')
 plt.plot(table_AGB_RGB["q"], table_AGB_RGB["a_f"]/ table_AGB_RGB["R1"], 's', color='k')
 
@@ -99,7 +109,6 @@ plt.legend()
 plt.grid()
 plt.tight_layout()
 plt.savefig("observations_log.png")
-
 
 
 plt.figure()
