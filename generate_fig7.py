@@ -3,17 +3,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 import pandas as pd
-import copyreg
-import matplotlib.path
-import copy
-import matplotlib.path as mpath
-
-def safe_deepcopy_path(self, memo=None):
-    # Bypass deepcopy entirely and return self (safe for legend)
-    return self
-
-mpath.Path.__deepcopy__ = safe_deepcopy_path
-
 
 params = {'backend': 'agg',
           'axes.labelsize': 24,  
