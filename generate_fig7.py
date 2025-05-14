@@ -3,6 +3,17 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy import stats
 import pandas as pd
+import copyreg
+import matplotlib.path
+import copy
+import matplotlib.path as mpath
+
+def safe_deepcopy_path(self, memo=None):
+    # Bypass deepcopy entirely and return self (safe for legend)
+    return self
+
+mpath.Path.__deepcopy__ = safe_deepcopy_path
+
 
 params = {'backend': 'agg',
           'axes.labelsize': 24,  
@@ -39,6 +50,7 @@ def estimate_giant_properties(M1):
         M_MS = 1.19
         M_giant = 0.9 * M_MS
     else:
+        M1=M1+0.028
         if 0.47 <= M1 < 0.53:
             M_MS =  7.42 * M1 - 2.93
         elif 0.53 <= M1 < 0.59:
@@ -61,7 +73,7 @@ m_giant_list = []
 r_giant_list = []
 
 for M1 in table["M1"]:
-    m_giant, r_giant = estimate_giant_properties(M1+0.028)
+    m_giant, r_giant = estimate_giant_properties(M1)
     m_giant_list.append(m_giant)
     r_giant_list.append(r_giant)
 
