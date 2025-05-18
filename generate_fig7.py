@@ -38,6 +38,7 @@ def estimate_giant_properties(M1):
     if M1 <= 0.47:
         M_MS = 1.19
         M_giant = 0.9 * M_MS
+        R_giant = 440 * (M_MS)**(-0.47) * ((M1) / 0.6)**(5.1) 
     else:
         M1=M1+0.028
         if 0.47 <= M1 < 0.53:
@@ -53,8 +54,7 @@ def estimate_giant_properties(M1):
         elif 0.835 <= M1 <= 0.9:
             M_MS =  32.26 * M1 - 22.90
         M_giant = 0.75 * M_MS
-
-    R_giant = 440 * (M_MS)**(-0.47) * (M1 / 0.6)**(5.1)
+        R_giant = 440 * (M_MS)**(-0.47) * ((M1-0.028) / 0.6)**(5.1) #we decrease the 0.028 because we want the core mass during CEE not the WD mass
     return M_giant, R_giant
 
 
