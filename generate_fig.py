@@ -85,15 +85,20 @@ table_AGB_RGB = ascii.read(file_path)
 print(table)
 
 
+
+AGB_data = table_AGB_RGB[table_AGB_RGB["Type"] == "AGB"]
+RGB_data = table_AGB_RGB[table_AGB_RGB["Type"] == "RGB"]
+
+
 plt.figure()
 sc = plt.scatter(table["q_before"], table["a"]/table["R_giant"], c=table["M1"], cmap='rainbow', s=70, linewidth=0.3)
 plt.xscale("log")
 plt.yscale("log")
 q = np.linspace(0.15, 1.2, 100)
 plt.loglog(q, 0.31 * q - 0.009, '-', color='k', label=r'Eq. (13)')
-plt.plot(table_SG["q"], table_SG["a_f"]/ table_SG["R1"], 's', color='k', label='Simulations')
-plt.plot(table_AGB_RGB["q"], table_AGB_RGB["a_f"]/ table_AGB_RGB["R1"], 's', color='k')
-
+plt.plot(AGB_data["q"], AGB_data["a_f"] / AGB_data["R1"], 'o', color='k', label='AGB Simulations')
+plt.plot(RGB_data["q"], RGB_data["a_f"] / RGB_data["R1"], 's', color='k', label='RGB Simulations')
+plt.plot(table_SG["q"], table_SG["a_f"] / table_SG["R1"], '*', color='k', label='Supergiant Simulations', markersize=9)
 plt.xlabel("q")
 plt.ylabel('$\\rm a_{\\rm f}/ \\rm R_{\\rm 1}$')
 plt.legend()
@@ -104,8 +109,9 @@ plt.savefig("observations_log.png")
 
 plt.figure()
 sc = plt.scatter(table["q_before"], table["a"], c=table["M1"], cmap='rainbow', s=70, linewidth=0.3)
-plt.plot(table_SG["q"], table_SG["a_f"], 's', color='k', label='Simulations')
-plt.plot(table_AGB_RGB["q"], table_AGB_RGB["a_f"], 's', color='k')
+plt.plot(AGB_data["q"], AGB_data["a_f"] , '^', color='k', label='AGB Simulations')
+plt.plot(RGB_data["q"], RGB_data["a_f"] , 'o', color='k', label='RGB Simulations')
+plt.plot(table_SG["q"], table_SG["a_f"], '*', color='k', label='Supergiant Simulations', markersize=9)
 plt.xscale("log")
 plt.yscale("log")
 plt.xlabel('q')
