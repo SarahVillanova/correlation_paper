@@ -76,12 +76,11 @@ table = table[table["q_before"]<1]
 
 
 
+
 df1 = pd.read_csv('Tab3.dat', delim_whitespace=True)
 df2 = pd.read_csv('Tab4.dat', delim_whitespace=True)
 
 df = pd.concat([df1, df2], ignore_index=True)
-
-
 
 df_agb = df[df["Type"] == "AGB"]
 df_sg = df[df["Type"] == "SG"]
@@ -105,7 +104,7 @@ sc = plt.scatter(table["q_before"], table["a"]/table["R_giant"], c=table["M1"], 
 plt.xscale("log")
 plt.yscale("log")
 q = np.linspace(0.15, 1.2, 100)
-plt.loglog(q, 0.31 * q - 0.009, '-', color='k', label=r'Eq. (13)')
+plt.loglog(q, 0.31 * q -0.01, '-', color='k', label='Eq. (6)')
 
 plt.plot(df_agb["q"], df_agb["a_f"] / df_agb["R1"], 's', color='k', label='AGB Simulations')
 plt.plot(df_rgb["q"], df_rgb["a_f"] / df_rgb["R1"], 'P', color='k', label='RGB Simulations')
