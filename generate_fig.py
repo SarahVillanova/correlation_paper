@@ -92,12 +92,12 @@ df_rgb = df[df["Type"] == "RGB"]
 # To estimate R1 for KOI-3278, we considered P_orb= 978 days (onset of CEE, Belloni et al., 2024a) to estimate "a" and, consequently, R thorough Eggleton's formula
 # For the other objects R_1 is already given in Belloni et al.(2024b).
 G=6.67e-8
-MS_newobs=np.array([3.4,3.62,2.4,2.9,2.6,1.18]) # in Msun
+MS_newobs=np.array([3.37,3.23,2.44,2.88,2.55,1.18]) # in Msun
 WD_newobs=np.array([1.24,1.37,1.32,1.42,1.27,0.53]) # in Msun
-Sec_newobs=np.array([1.109,1.14,0.708, 0.957, 0.975,0.91])  # in Msun
-R1_newobs=np.array([1123,1273,1336,1375,1261,212])  # in Rsun
-Porb_newobs=np.array([17.92,32.14,45.47,46.1,49,88.18])*24*3600 # in seconds
-a_final_newobs =((G*(WD_newobs+Sec_newobs)* 2e+33 *Porb_newobs**2/4/np.pi**2)**(1/3))/7e+10 # in Rsun
+Sec_newobs=np.array([1.11,1.14,0.71, 0.96, 0.98,0.91])  # in Msun
+R1_newobs=np.array([1123,1273,1336,1375,1262,213])  # in Rsun
+Porb_newobs=np.array([17.9,32.2,45.5,46.1,49,88.2])*24*3600 # in seconds
+a_final_newobs =((G*(WD_newobs+Sec_newobs)* 2e+33 *Porb_newobs**2/4/np.pi**2)**(1/3))/6.957e+10 # in Rsun
 
 plt.figure()
 sc = plt.scatter(table["q_before"], table["a"]/table["R_giant"], c=table["M1"], cmap='rainbow', s=70, linewidth=0.3)
